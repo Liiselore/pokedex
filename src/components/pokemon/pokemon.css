@@ -1,0 +1,21 @@
+body {
+    font-family: Calibri, monospace;
+}
+
+h2 {
+    font-family: Forte, sans-serif;
+    font-size: 30px;
+    align-self: center;
+}
+
+.pokemon-card {
+    background: lightblue;
+    padding: 20px;
+    width: 150px;
+    height: 250px;
+    border-radius: 20px;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    align-content: center;
+}
