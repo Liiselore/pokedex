@@ -5,11 +5,12 @@ const Pokemon = () => {
     const [pokemon, setPokemon] = useState({});
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
+    const [selectedPokemonId, setSelectedPokemonId] = useState(randomPokemon());
 
     useEffect(() => {
         async function fetchPokemon() {
             try {
-                const response = await fetch('https://pokeapi.co/api/v2/pokemon/1');
+                const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${selectedPokemonId}`);
                 if (response.ok) {
                     const data = await response.json();
                     setPokemon(data);
@@ -22,7 +23,11 @@ const Pokemon = () => {
         }
 
         fetchPokemon();
-    }, []);
+    }, [selectedPokemonId]);
+
+    function randomPokemon() {
+        return Math.floor(Math.random() * 151);
+    }
 
     const openModal = () => {
         setShowModal(true);
@@ -30,7 +35,6 @@ const Pokemon = () => {
 
     const closeModal = () => {
         setShowModal(false);
-
         console.log("SLUIT DAN")
     };
 
@@ -42,7 +46,7 @@ const Pokemon = () => {
         <div className={"pokemon-card"} onClick={openModal}>
             <h2>{pokemon.name}</h2>
             <p>ID: #{pokemon.id}</p>
-            <p>Type: {pokemon.types[0].type.name} & {pokemon.types[1].type.name}</p>
+            {/*<p>Type: {pokemon.types[0].type.name} & {pokemon.types[1].type.name}</p>*/}
             {showModal && (
                 <div className="modal">
                     <div className="modal-content">
