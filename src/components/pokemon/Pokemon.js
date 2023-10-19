@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import "./pokemon.css";
 
 const Pokemon = () => {
@@ -6,6 +6,7 @@ const Pokemon = () => {
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [selectedPokemonId, setSelectedPokemonId] = useState(randomPokemon());
+    const modalRef = useRef();
 
     useEffect(() => {
         async function fetchPokemon() {
@@ -23,6 +24,11 @@ const Pokemon = () => {
         }
 
         fetchPokemon();
+
+        document.addEventListener('mousedown', handleOutsideClick);
+        return () => {
+            document.removeEventListener('mousedown', handleOutsideClick);
+        }
     }, [selectedPokemonId]);
 
     function randomPokemon() {
@@ -38,6 +44,12 @@ const Pokemon = () => {
         console.log("SLUIT DAN")
     };
 
+    const handleOutsideClick = (e) => {
+        if (modalRef.current && !modalRef.current.contains(e.target)) {
+            closeModal();
+        }
+    };
+
     if (loading) {
         return <p>Laden...</p>;
     }
@@ -46,13 +58,13 @@ const Pokemon = () => {
         <div className={"pokemon-card"} onClick={openModal}>
             <h2>{pokemon.name}</h2>
             <p>ID: #{pokemon.id}</p>
-            {/*<p>Type: {pokemon.types[0].type.name} & {pokemon.types[1].type.name}</p>*/}
+            <p> Type: {pokemon.types[0].type.name}</p>
             {showModal && (
                 <div className="modal">
-                    <div className="modal-content">
-                        <span className="close" onClick={closeModal}>X</span>
+                    <div className="modal-content" ref={modalRef}>
                         <h2>{pokemon.name}</h2>
-                        <p> Type: {pokemon.types[0].type.name} & {pokemon.types[1].type.name} </p>
+                        <p>Height: {pokemon.height} dm</p>
+                        <p>Weight: {pokemon.weight} hg</p>
                     </div>
                 </div>
             )}
