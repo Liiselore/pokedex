@@ -41,7 +41,6 @@ const Pokemon = () => {
 
     const closeModal = () => {
         setShowModal(false);
-        console.log("SLUIT DAN")
     };
 
     const handleOutsideClick = (e) => {

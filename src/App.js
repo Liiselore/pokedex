@@ -2,6 +2,7 @@ import './App.css';
 import Pokemon from "./components/pokemon/Pokemon";
 
 function App() {
+
     return (
         <>
             <h1>Pokédex</h1>
@@ -10,6 +11,15 @@ function App() {
                 <Pokemon/>
                 <Pokemon/>
                 <Pokemon/>
+                <Pokemon/>
+                <Pokemon/>
+            </div>
+            <div>
+                <button type={"button"}
+                        className={"randomize-button"}
+                >
+                    Randomize pokémon
+                </button>
             </div>
         </>
     );

@@ -1,5 +1,5 @@
 body {
-    font-family: Calibri, monospace;
+    font-family: "Javanese Text", sans-serif;
 }
 
 h2 {
@@ -21,9 +21,6 @@ h2 {
     align-content: center;
     margin-bottom: 10px;
     margin-right: 10px;
-}
-
-.pokemon-card :hover {
     cursor: pointer;
 }
 
